@@ -6,7 +6,7 @@ function wordCounter(text) {
   }
   let wordCount = 0;
   const textArray = text.split(" ");
-  textArray.forEach(function(element) {
+  textArray.forEach(function (element) {
     if (!Number(element)) {
       wordCount++;
     }
@@ -20,30 +20,40 @@ function wordCounter(text) {
 }
 
 function numberOfOccurrencesInText(word, text) {
-  const textArray = text.split(" ");
-  let wordCount = 0;
-  textArray.forEach(function(element) {
-    if (element.toLowerCase().includes(word.toLowerCase())) {
-      wordCount++;
-    }
-  });
-  const header = document.createElement("h3");
-  header.append("This is a number of the word's occurences in your sentence:");
-  document.body.append(header);
-  const paragraph = document.createElement("p");
-  paragraph.append(wordCount);
-  document.body.append(paragraph);
-
+  let word1 = word.trim();
+  if (word1.length === 0) {
+    const header = document.createElement("h3");
+    header.append("This is a number of the word's occurences in your sentence:");
+    document.body.append(header);
+    const paragraph = document.createElement("p");
+    paragraph.append("0");
+    document.body.append(paragraph);
+  }
+  else {
+    const textArray = text.split(" ");
+    let wordCount = 0;
+    textArray.forEach(function (element) {
+      if (element.toLowerCase().includes(word.toLowerCase())) {
+        wordCount++;
+      }
+    });
+    const header = document.createElement("h3");
+    header.append("This is a number of the word's occurences in your sentence:");
+    document.body.append(header);
+    const paragraph = document.createElement("p");
+    paragraph.append(wordCount);
+    document.body.append(paragraph);
+  }
 }
 
 function omitOffensiveWords(text) {
   const textArray = text.split(" ");
   const result = textArray.filter(checkOffensive)
   function checkOffensive(element) {
-      console.log(element);
-       if (element !== "zoinks" && element !== "muppeteer" && element !== "biffaroni" && element !== "loopdaloop") {
-       return element;
-       }
+    console.log(element);
+    if (element !== "zoinks" && element !== "muppeteer" && element !== "biffaroni" && element !== "loopdaloop") {
+      return element;
+    }
   };
   const header = document.createElement("h3");
   header.append("This is your sentence without offensive words:");
