@@ -151,3 +151,49 @@ const word = "hello";
 const text = "hello there";
 boldPassage(word, text);
 Expected Output: <p><strong>hello</strong> there</p>
+
+
+Describe: countEachWord()
+
+Test: "It should return null if no word or text is entered."
+Code:
+const text = "";
+boldPassage(text);
+Expected Output: null
+
+Test: "It should return exact number of occurences for every word."
+Code:
+const text = "Hi there hey yo hi hi yay yo whoa there whoa yay";
+boldPassage(text);
+Expected Output: 
+hi: 3
+there: 2
+hey: 1
+yo: 2
+yay: 2
+whoa: 2
+
+Test: "It should return exact number of occurences for every word in descending order."
+Code:
+const text = "Hi there hey yo hi hi yay yo whoa there whoa yay";
+boldPassage(text);
+Expected Output: 
+hi: 3
+there: 2
+yo: 2
+yay: 2
+whoa: 2
+hey: 1
+
+Test: "It should return exact number of occurences for every word in descending order. It should count capitalized words as the same."
+Code:
+const text = "Hi there hey yo hi hi yay yo whoa there whoa yay";
+boldPassage(text);
+Expected Output: 
+hi: 3
+there: 2
+yo: 2
+yay: 2
+whoa: 2
+hey: 1
+

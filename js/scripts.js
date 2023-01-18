@@ -69,7 +69,7 @@ function boldPassage(word, text) {
   }
   const p = document.createElement("p");
   let textArray = text.split(" ");
-  textArray.forEach(function(element, index) {
+  textArray.forEach(function (element, index) {
     if (word === element) {
       const bold = document.createElement("strong");
       bold.append(element);
@@ -90,20 +90,58 @@ function boldPassage(word, text) {
   document.body.append(paragraph);
 }
 
-//Interface Logic 
-window.onload = function () {
-  const form = document.querySelector("form");
-  form.onsubmit = function (event) {
-    event.preventDefault();
-    let array = [];
-    let array1 = [];
-    array[0] = document.getElementById("input").value;
-    wordInput = document.getElementById("wordInput").value;
-    array1 = array.toString();
-    wordCounter(array1);
-    numberOfOccurrencesInText(wordInput, array1);
-    omitOffensiveWords(array1);
-    boldPassage(wordInput, array1)
+function countEachWord(text) {
+  let array = [];
+  let array1 = [];
+  let array2 = [];
+  let array3 = [];
+
+  array[0] = document.getElementById("input").value;
+  array1 = array.toString();
+  array1 = array1.split(" ");
+  if (text.trim().length === 0) {
+    return null;
+  }
+  else {
+    array1.forEach(function (element) {
+      element = element.toLowerCase();
+      array3.push(element);
+    });
+    array3.forEach(function (element1) {
+      let count = 0;
+      array3.forEach(function (element2) {
+        if (element1 === element2) {
+          count += 1;
+        }
+      });
+      array2.push(count + " - " + element1);
+    });
+    let uniqueArray = [...new Set(array2)];
+    uniqueArray.sort();
+    uniqueArray.reverse();
+    uniqueArray.forEach(function (word) {
+      const paragraph = document.createElement("p");
+      paragraph.append(word);
+      document.body.append(paragraph);
+    });
+  }
+}
+
+  //Interface Logic 
+  window.onload = function () {
+    const form = document.querySelector("form");
+    form.onsubmit = function (event) {
+      event.preventDefault();
+      let array = [];
+      let array1 = [];
+      array[0] = document.getElementById("input").value;
+      wordInput = document.getElementById("wordInput").value;
+      array1 = array.toString();
+      wordCounter(array1);
+      numberOfOccurrencesInText(wordInput, array1);
+      omitOffensiveWords(array1);
+      boldPassage(wordInput, array1)
+      countEachWord(array1);
     }
   }
 
