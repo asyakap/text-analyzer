@@ -63,6 +63,34 @@ function omitOffensiveWords(text) {
   document.body.append(paragraph);
 }
 
+function boldPassage(word, text) {
+  if ((text.trim().length === 0) || (word.trim().length === 0)) {
+    return null;
+  }
+  const p = document.createElement("p");
+  let textArray = text.split(" ");
+  textArray.forEach(function(element, index) {
+    if (word === element) {
+      const bold = document.createElement("strong");
+      bold.append(element);
+      p.append(bold);
+    } else {
+      p.append(element);
+    }
+    if (index !== (textArray.length - 1)) {
+      p.append(" ");
+    }
+    return p;
+  });
+  const header = document.createElement("h3");
+  header.append("This is your sentence with bolded repeated words:");
+  document.body.append(header);
+  const paragraph = document.createElement("p");
+  paragraph.append(p);
+  document.body.append(paragraph);
+}
+
+//Interface Logic 
 window.onload = function () {
   const form = document.querySelector("form");
   form.onsubmit = function (event) {
@@ -75,5 +103,7 @@ window.onload = function () {
     wordCounter(array1);
     numberOfOccurrencesInText(wordInput, array1);
     omitOffensiveWords(array1);
+    boldPassage(wordInput, array1)
+    }
   }
-}
+
