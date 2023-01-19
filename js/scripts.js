@@ -127,21 +127,60 @@ function countEachWord(text) {
   }
 }
 
-  //Interface Logic 
-  window.onload = function () {
-    const form = document.querySelector("form");
-    form.onsubmit = function (event) {
-      event.preventDefault();
-      let array = [];
-      let array1 = [];
-      array[0] = document.getElementById("input").value;
-      wordInput = document.getElementById("wordInput").value;
-      array1 = array.toString();
-      wordCounter(array1);
-      numberOfOccurrencesInText(wordInput, array1);
-      omitOffensiveWords(array1);
-      boldPassage(wordInput, array1)
-      countEachWord(array1);
-    }
+function boldSection(text, word) {
+  let array = document.getElementById("input").value;
+  let word1 = document.getElementById("wordInput").value;
+  let array1 = array.toString();
+  const p = document.createElement("p");
+  array1 = array1.split(" ");
+  if ((text.trim().length === 0) || (word.trim().length === 0)) {
+    return null;
   }
+  else {
+    array1.forEach(function(element) {
+    if (element.includes(word1)) {
+      let index1 = text.indexOf(word1);
+      console.log(index1);
+      let part1 = text.substring(0, index1);
+      let index2 = index1 + word1.length;
+      let part2 = text.substring(index2,element.length);
+      let bold = document.createElement("strong");
+      bold.append(word1);
+      console.log(bold);
+      p.append(part1);
+      p.append(bold);
+      p.append(part2);
+    } else {
+      p.append(element);
+    }
+    return p;
+  });
+  }
+  
+  const header = document.createElement("h3");
+  header.append("This is your sentence with bolded sections of repeated words:");
+  document.body.append(header);
+  const paragraph = document.createElement("p");
+  paragraph.append(p);
+  document.body.append(paragraph);
+}
+
+//Interface Logic 
+window.onload = function () {
+  const form = document.querySelector("form");
+  form.onsubmit = function (event) {
+    event.preventDefault();
+    let array = [];
+    let array1 = [];
+    array[0] = document.getElementById("input").value;
+    wordInput = document.getElementById("wordInput").value;
+    array1 = array.toString();
+    wordCounter(array1);
+    numberOfOccurrencesInText(wordInput, array1);
+    omitOffensiveWords(array1);
+    boldPassage(wordInput, array1)
+    countEachWord(array1);
+    boldSection(array1, wordInput);
+  }
+}
 

@@ -158,13 +158,13 @@ Describe: countEachWord()
 Test: "It should return null if no word or text is entered."
 Code:
 const text = "";
-boldPassage(text);
+countEachWord(text);
 Expected Output: null
 
 Test: "It should return exact number of occurences for every word."
 Code:
 const text = "Hi there hey yo hi hi yay yo whoa there whoa yay";
-boldPassage(text);
+countEachWord(text);
 Expected Output: 
 hi: 3
 there: 2
@@ -176,7 +176,7 @@ whoa: 2
 Test: "It should return exact number of occurences for every word in descending order."
 Code:
 const text = "Hi there hey yo hi hi yay yo whoa there whoa yay";
-boldPassage(text);
+countEachWord(text);
 Expected Output: 
 hi: 3
 there: 2
@@ -188,7 +188,7 @@ hey: 1
 Test: "It should return exact number of occurences for every word in descending order. It should count capitalized words as the same."
 Code:
 const text = "Hi there hey yo hi hi yay yo whoa there whoa yay";
-boldPassage(text);
+countEachWord(text);
 Expected Output: 
 hi: 3
 there: 2
@@ -197,3 +197,25 @@ yay: 2
 whoa: 2
 hey: 1
 
+
+Describe boldSection(text, word)
+
+Test: "It should return null if no text is entered."
+Code:
+const text = "";
+boldSection(text, word)
+Expected Output: null
+
+Test: "It should return text if text doesn't match the word partly."
+Code:
+const text = "hello";
+const text = "ap";
+boldSection(text, word)
+Expected Output: hello
+
+Test: "It should return text with bolded part if this part matches the word."
+Code:
+const text = "hello";
+const text = "ll";
+boldSection(text, word)
+Expected Output: <p>he<strong>ll</strong>o</p>
